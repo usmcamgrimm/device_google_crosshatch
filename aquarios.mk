@@ -18,29 +18,15 @@
 # device-specific aspects (drivers) with a device-agnostic
 # product configuration (apps). Except for a few implementation
 # details, it only fundamentally contains two inherit-product
-# lines, aosp and du, hence its name.
+# lines, aosp and aquarios, hence its name.
 #
-
-# Include DU common configuration
-include vendor/du/config/common_full_phone.mk
-
-# Inherit from those products. Most specific first.
-$(call inherit-product, device/google/crosshatch/aosp_crosshatch.mk)
 
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 
-PRODUCT_NAME := du_crosshatch
-PRODUCT_DEVICE := crosshatch
-PRODUCT_BRAND := Google
-PRODUCT_MODEL := Pixel 3 XL
-PRODUCT_MANUFACTURER := Google
+# Inherit from those products. Most specific first.
+$(call inherit-product, device/google/crosshatch/aosp_crosshatch.mk)
 
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME=crosshatch \
-    BUILD_FINGERPRINT=google/crosshatch/crosshatch:9/PQ1A.181105.017.A1/5081125:user/release-keys \
-    PRIVATE_BUILD_DESC="crosshatch-user 9 PQ1A.181105.017.A1 5081125 release-keys"
-
-$(call inherit-product-if-exists, vendor/google/crosshatch/crosshatch-vendor.mk)
-$(call inherit-product-if-exists, vendor/pixelgapps/pixel-gapps.mk)
+$(call inherit-product, vendor/google/crosshatch/crosshatch-vendor.mk)
+$(call inherit-product, vendor/pixelgapps/pixel-gapps.mk)
